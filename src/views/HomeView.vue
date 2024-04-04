@@ -15,7 +15,7 @@ onMounted(() => {
 
 <template>
 	<main>
-		<h1>Home View!</h1>
+		<h1 class="text-3xl font-bold underline text-yellow-600 border-red-900">Home View</h1>
 	</main>
 </template>
 
