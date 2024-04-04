@@ -12,6 +12,9 @@ export const useTasksStore = defineStore('tasks', () => {
   function fetchTasks() {
     try {
       tasks.value = fetchAllTasks()
+
+      console.log(tasks.value);
+
     } catch (error) {
       console.error(error)
     }
