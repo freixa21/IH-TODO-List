@@ -22,6 +22,18 @@ const _addTask = async () => {
 	tasksStore.fetchTasks();
 }
 
+
+const _deleteTask = async () => {
+	const task = {
+		id: event.target.attributes.taskid.value,
+		user_id: '59d670b9-7fe3-41e5-8d63-527d4ca1b504',
+	}
+	// Borra la task
+	await tasksStore.deleteSeletedTask(task);
+	// Refresca las tasks despues de crearla
+	tasksStore.fetchTasks();
+}
+
 onMounted(() => {
 	tasksStore.fetchTasks();
 })
@@ -36,8 +48,13 @@ onMounted(() => {
 	<section>
 		<span>Total Tasks: {{ tasks.length }}</span>
 
-		<ul>
-			<li v-for="task in tasks" :key="tasks.id"> {{ task.title }}</li>
+		<ul class="max-w-96">
+			<li v-for="task in tasks" :key="task.id">
+				<div class="bg-slate-100 flex flex-row items-center justify-between my-2">
+					<div>{{ task.title }}</div>
+					<div><button @click="_deleteTask" :taskid="task.id">Delete Task</button></div>
+				</div>
+			</li>
 		</ul>
 
 		<div>

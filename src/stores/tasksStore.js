@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { fetchAllTasks, createTask } from '@/api/tasksApi'
+import { fetchAllTasks, createTask, deleteTask } from '@/api/tasksApi'
 
 export const useTasksStore = defineStore('tasks', () => {
   // State
@@ -26,6 +26,14 @@ async function createNewTask(task) {
     }
   }
 
+  async function deleteSeletedTask(task) {
+    try {
+      await deleteTask(task)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return {
     // State
     tasks,
@@ -33,5 +41,6 @@ async function createNewTask(task) {
     // Actions
     fetchTasks,
     createNewTask,
+    deleteSeletedTask
   }
 })

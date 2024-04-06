@@ -23,3 +23,14 @@ export const createTask = async (task) => {
 
   return true
 }
+
+
+export const deleteTask = async (task) => {
+  const { error } = await supabase
+  .from(TABLE_NAME)
+  .delete()
+  .match({ 'id': task.id, 'user_id': task.user_id });
+  if (error) {
+    throw new Error(error.message)
+  }
+}

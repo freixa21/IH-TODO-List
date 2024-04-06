@@ -2,3 +2,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+button {
+    background-color: rgb(0, 158, 158);
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: white;
+}
+
+input {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-right: 5px;
+}
