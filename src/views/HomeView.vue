@@ -15,7 +15,6 @@ const _addTask = async () => {
 		title: taskTitle.value,
 		is_complete: false,
 	}
-
 	// Crea la task
 	await tasksStore.createNewTask(task);
 	// Refresca las tasks despues de crearla
@@ -29,7 +28,29 @@ const _deleteTask = async () => {
 		user_id: '59d670b9-7fe3-41e5-8d63-527d4ca1b504',
 	}
 	// Borra la task
-	await tasksStore.deleteSeletedTask(task);
+	await tasksStore.deleteSelectedTask(task);
+	// Refresca las tasks despues de crearla
+	tasksStore.fetchTasks();
+}
+
+const _markAsCompleted = async () => {
+	const task = {
+		id: event.target.attributes.taskid.value,
+		user_id: '59d670b9-7fe3-41e5-8d63-527d4ca1b504',
+	}
+	// Borra la task
+	await tasksStore.markAsCompleted(task);
+	// Refresca las tasks despues de crearla
+	tasksStore.fetchTasks();
+}
+
+const _markAsIncompleted = async () => {
+	const task = {
+		id: event.target.attributes.taskid.value,
+		user_id: '59d670b9-7fe3-41e5-8d63-527d4ca1b504',
+	}
+	// Borra la task
+	await tasksStore.markAsIncompleted(task);
 	// Refresca las tasks despues de crearla
 	tasksStore.fetchTasks();
 }
@@ -53,6 +74,8 @@ onMounted(() => {
 				<div class="bg-slate-100 flex flex-row items-center justify-between my-2">
 					<div>{{ task.title }}</div>
 					<div><button @click="_deleteTask" :taskid="task.id">Delete Task</button></div>
+					<div v-if="task.is_complete"><button @click="_markAsIncompleted" :taskid="task.id">Mark as completed</button></div>
+					<div v-else><button @click="_markAsCompleted" :taskid="task.id">Mark as incompleted</button></div>
 				</div>
 			</li>
 		</ul>

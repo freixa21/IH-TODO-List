@@ -34,3 +34,24 @@ export const deleteTask = async (task) => {
     throw new Error(error.message)
   }
 }
+
+export const markTaskAsCompleted = async (task) => {
+  const { error } = await supabase
+  .from(TABLE_NAME)
+  .update({ is_complete: 1 })
+  .match({ 'id': task.id, 'user_id': task.user_id });
+  if (error) {
+    throw new Error(error.message)
+  }
+}
+
+
+export const markTaskAsIncompleted = async (task) => {
+  const { error } = await supabase
+  .from(TABLE_NAME)
+  .update({ is_complete: 0 })
+  .match({ 'id': task.id, 'user_id': task.user_id });
+  if (error) {
+    throw new Error(error.message)
+  }
+}
