@@ -55,3 +55,13 @@ export const markTaskAsIncompleted = async (task) => {
     throw new Error(error.message)
   }
 }
+
+export const editTaskAPI = async (task) => {
+  const { error } = await supabase
+  .from(TABLE_NAME)
+  .update({ title: task.title })
+  .match({ 'id': task.id });
+  if (error) {
+    throw new Error(error.message)
+  }
+}
