@@ -12,6 +12,21 @@ export const fetchAllTasks = async () => {
   return data
 }
 
+
+export const fetchTaskDetails = async (taskId) => {
+  const { data, error } = await supabase
+  .from('tasks')
+  .select()
+  .eq('id', taskId)
+
+
+  if (error) {
+    throw new Error(error.message)
+  }
+  return data
+}
+
+
 export const createTask = async (task) => {
   const { error } = await supabase
   .from(TABLE_NAME)

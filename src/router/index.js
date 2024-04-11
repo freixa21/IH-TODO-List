@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import TaskEditPage from '@/views/TaskEditPage.vue';
 
 import { useUserStore } from '@/stores/userStore'
 
@@ -20,6 +21,12 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: () => import('@/views/AboutView.vue')
+    },
+    {
+      path: '/tasks/:taskId/edit',
+      name: 'TaskEdit',
+      component: TaskEditPage,
+      props: true
     }
   ]
 })

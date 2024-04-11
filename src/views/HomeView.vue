@@ -3,12 +3,15 @@
 import { useTasksStore } from '@/stores/tasksStore';
 import { storeToRefs } from 'pinia';
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const tasksStore = useTasksStore();
 const { tasks } = storeToRefs(tasksStore);
+const router = useRouter();
+
 
 const taskTitle = ref('');
-const editedTaskId = ref(''); // To store the ID of the task being edited
+const editedTaskId = ref('');
 
 const _addTask = async () => {
 	const task = {
@@ -57,23 +60,26 @@ const _markAsIncompleted = async (taskId) => {
 	tasksStore.fetchTasks();
 }
 
+const _editTask = (taskId) => {
+  router.push({ name: 'TaskEdit', params: { taskId } });
+};
 
-const _editTask = async () => {
+// const _editTask = async () => {
 
-	console.log(editedTaskId.value);
-	console.log(taskTitle.value);
+// 	console.log(editedTaskId.value);
+// 	console.log(taskTitle.value);
 
-	if (editedTaskId.value) {
-		const task = {
-			id: editedTaskId.value,
-			title: taskTitle.value,
-		}
-		await tasksStore.editTask(task);
-		editedTaskId.value = null;
-		taskTitle.value = ''; 
-		tasksStore.fetchTasks();
-	}
-}
+// 	if (editedTaskId.value) {
+// 		const task = {
+// 			id: editedTaskId.value,
+// 			title: taskTitle.value,
+// 		}
+// 		await tasksStore.editTask(task);
+// 		editedTaskId.value = null;
+// 		taskTitle.value = ''; 
+// 		tasksStore.fetchTasks();
+// 	}
+// }
 
 onMounted(() => {
 	tasksStore.fetchTasks();
@@ -83,11 +89,11 @@ onMounted(() => {
 
 <template>
 	<main>
-		<h1 class="text-3xl font-bold underline text-yellow-600 border-red-900">Tasks</h1>
+		<h1 class="text-3xl font-bold text-center">TO DO LIST</h1>
 	</main>
 
-	<section>
-		<span>Total Tasks: {{ tasks.length }}</span>
+	<section class="max-w-screen-sm m-auto">
+		<!-- <span>Total Tasks: {{ tasks.length }}</span> -->
 
 		<ul class="w-full">
 			<li v-for="task in tasks" :key="task.id">
@@ -99,11 +105,10 @@ onMounted(() => {
 						<span v-else>{{ task.title }}</span>
 					</div>
 					<div>
-						<button @click="_deleteTask(task.id)">Delete Task</button>
+						<button @click="_deleteTask(task.id)"><img src="@/assets/images/delete.svg" alt=""></button>
 						<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)">Mark as Completed</button>
 						<button v-else @click="_markAsIncompleted(task.id)">Mark as Incomplete</button>
-						<button v-if="!editedTaskId" @click="editedTaskId = task.id">Edit Task</button>
-						<button v-if="editedTaskId === task.id" @click="_editTask">Save</button>
+						<button @click="_editTask(task.id)"><img src="@/assets/images/edit.svg" alt=""></button>
 					</div>
 				</div>
 			</li>
