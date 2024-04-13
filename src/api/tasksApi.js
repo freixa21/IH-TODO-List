@@ -8,18 +8,15 @@ export const fetchAllTasks = async () => {
   if (error) {
     throw new Error(error.message)
   }
-
   return data
 }
 
 
 export const fetchTaskDetails = async (taskId) => {
   const { data, error } = await supabase
-  .from('tasks')
-  .select()
-  .eq('id', taskId)
-
-
+    .from('tasks')
+    .select()
+    .eq('id', taskId).single();
   if (error) {
     throw new Error(error.message)
   }
@@ -29,9 +26,9 @@ export const fetchTaskDetails = async (taskId) => {
 
 export const createTask = async (task) => {
   const { error } = await supabase
-  .from(TABLE_NAME)
-  .insert(task)
-  
+    .from(TABLE_NAME)
+    .insert(task)
+
   if (error) {
     throw new Error(error.message)
   }
@@ -42,9 +39,9 @@ export const createTask = async (task) => {
 
 export const deleteTask = async (task) => {
   const { error } = await supabase
-  .from(TABLE_NAME)
-  .delete()
-  .match({ 'id': task.id, 'user_id': task.user_id });
+    .from(TABLE_NAME)
+    .delete()
+    .match({ 'id': task.id, 'user_id': task.user_id });
   if (error) {
     throw new Error(error.message)
   }
@@ -52,9 +49,9 @@ export const deleteTask = async (task) => {
 
 export const markTaskAsCompleted = async (task) => {
   const { error } = await supabase
-  .from(TABLE_NAME)
-  .update({ is_complete: 1 })
-  .match({ 'id': task.id, 'user_id': task.user_id });
+    .from(TABLE_NAME)
+    .update({ is_complete: 1 })
+    .match({ 'id': task.id, 'user_id': task.user_id });
   if (error) {
     throw new Error(error.message)
   }
@@ -63,9 +60,9 @@ export const markTaskAsCompleted = async (task) => {
 
 export const markTaskAsIncompleted = async (task) => {
   const { error } = await supabase
-  .from(TABLE_NAME)
-  .update({ is_complete: 0 })
-  .match({ 'id': task.id, 'user_id': task.user_id });
+    .from(TABLE_NAME)
+    .update({ is_complete: 0 })
+    .match({ 'id': task.id, 'user_id': task.user_id });
   if (error) {
     throw new Error(error.message)
   }
@@ -73,9 +70,9 @@ export const markTaskAsIncompleted = async (task) => {
 
 export const editTaskAPI = async (task) => {
   const { error } = await supabase
-  .from(TABLE_NAME)
-  .update({ title: task.title })
-  .match({ 'id': task.id });
+    .from(TABLE_NAME)
+    .update({ title: task.title })
+    .match({ 'id': task.id });
   if (error) {
     throw new Error(error.message)
   }
