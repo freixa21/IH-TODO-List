@@ -1,4 +1,5 @@
 import { supabase } from '@/api/supabase'
+import router from '@/router'
 
 export const fetchActualUser = async () => {
   const { data } = await supabase.auth.getSession()
@@ -17,13 +18,18 @@ export const createNewUser = async (email, password) => {
 
 export const logIn = async (email, password) => {
   const {
-    data: { user },
-    error
-  } = await supabase.auth.signInWithPassword({ email, password })
+    data: { user }, error } = await supabase.auth.signInWithPassword({
+      email, password
+    })
+
+  if (!error) {
+    router.push('/');
+  }
 
   if (error) {
     throw new Error(error.message)
   }
-
   return user
 }
+
+

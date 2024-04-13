@@ -10,13 +10,14 @@ const password = ref('')
 const signIn = () => {
 	userStore.signIn(user.value, password.value)
 }
+
 </script>
 
 <template>
 	<main>
 		<h1>Sign In View!</h1>
 		<label>
-			User:
+			Email:
 			<input type="text" v-model="user" />
 		</label>
 		<label>
