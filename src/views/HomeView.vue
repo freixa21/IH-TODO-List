@@ -2,7 +2,7 @@
 
 import { useTasksStore } from '@/stores/tasksStore';
 import { storeToRefs } from 'pinia';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 const tasksStore = useTasksStore();
@@ -61,25 +61,12 @@ const _markAsIncompleted = async (taskId) => {
 }
 
 const _editTask = (taskId) => {
-  router.push({ name: 'TaskEdit', params: { taskId } });
+	router.push({ name: 'TaskEdit', params: { taskId } });
 };
 
-// const _editTask = async () => {
-
-// 	console.log(editedTaskId.value);
-// 	console.log(taskTitle.value);
-
-// 	if (editedTaskId.value) {
-// 		const task = {
-// 			id: editedTaskId.value,
-// 			title: taskTitle.value,
-// 		}
-// 		await tasksStore.editTask(task);
-// 		editedTaskId.value = null;
-// 		taskTitle.value = ''; 
-// 		tasksStore.fetchTasks();
-// 	}
-// }
+const remainingLiCount = computed(() => {
+	return Math.max(15 - tasks.value.length, 0);
+});
 
 onMounted(() => {
 	tasksStore.fetchTasks();
@@ -88,41 +75,58 @@ onMounted(() => {
 </script>
 
 <template>
-	<main>
-		<h1 class="text-3xl font-bold text-center">TO DO LIST</h1>
-	</main>
-
-	<section class="max-w-screen-sm m-auto">
-		<!-- <span>Total Tasks: {{ tasks.length }}</span> -->
-
-		<ul class="w-full">
-			<li v-for="task in tasks" :key="task.id">
-				<div class="bg-slate-100 flex flex-row items-center justify-between my-2">
-					<div>
-						<span v-if="editedTaskId === task.id">
-							<input type="text" v-model="task.title">
-						</span>
-						<span v-else>{{ task.title }}</span>
+	<main class="flex flex-row items-center">
+		<div class="min-h-[85vh] w-full flex flex-row justify-center">
+			<div class="paper max-w-[600px] h-full w-full py-11 m-5">
+				<div class="lines">
+					<div class="my-10">
+						<strong>TO DO LIST</strong>
+						<ul class="w-full">
+							<li class="flex flex-row h-[30px] pt-[8px]"></li>
+							<li v-for="task in tasks" :key="task.id" class="flex flex-row h-[30px] pt-[8px] ">
+								<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)" class="mr-5"><img
+										src="@/assets/images/unchecked.svg" alt=""></button>
+								<button v-else @click="_markAsIncompleted(task.id)" class="mr-5"><img
+										src="@/assets/images/checked.svg" alt=""></button>
+								<div class="flex flex-row">
+									<div>
+										<span v-if="!task.is_complete" class="text-2xl" style="line-height: 0;">{{
+								task.title }}</span>
+										<span v-else
+											class="inline-block decoration-inherit relative after:w-full after:content-[''] after:block after:w-fill after:h-2/4 after:absolute after:top-[0.1rem] after:left-0 after:border-b-2 after:border-red-600 text-2xl"
+											style="line-height: 0;">{{ task.title }}</span>
+									</div>
+									<div class="absolute right-5">
+										<button @click="_deleteTask(task.id)"><img src="@/assets/images/delete.svg"
+												alt=""></button>
+										<button @click="_editTask(task.id)"><img src="@/assets/images/edit.svg"
+												alt=""></button>
+									</div>
+								</div>
+							</li>
+							<li class="flex flex-row h-[30px] pt-[8px]"></li>
+							<li><label>
+									New task:
+									<input type="text" v-model="taskTitle"
+										class="h-[28px] pt-[0px] mt-[5px] w-3/4 border-b-2 border-black focus:outline-none">
+								</label>
+								<button @click="_addTask">Add task</button>
+							</li>
+							<li class="flex flex-row h-[30px] pt-[8px]"></li>
+							<li v-for="index in remainingLiCount" :key="index" class="flex flex-row h-[30px] pt-[8px]">
+								<span></span>
+							</li>
+						</ul>
 					</div>
 					<div>
-						<button @click="_deleteTask(task.id)"><img src="@/assets/images/delete.svg" alt=""></button>
-						<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)">Mark as Completed</button>
-						<button v-else @click="_markAsIncompleted(task.id)">Mark as Incomplete</button>
-						<button @click="_editTask(task.id)"><img src="@/assets/images/edit.svg" alt=""></button>
+
 					</div>
 				</div>
-			</li>
-		</ul>
 
-		<div>
-			<label>
-				Task Title:
-				<input type="text" v-model="taskTitle">
-			</label>
-			<button @click="_addTask">Add task</button>
+			</div>
 		</div>
-	</section>
 
+	</main>
 </template>
 
 <style scoped></style>

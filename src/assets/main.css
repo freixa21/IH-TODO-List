@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Indie+Flower&display=swap');
 @import './base.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
-button {
+/* button {
     background-color: rgb(0, 158, 158);
     border-radius: 10px;
     padding: 10px 20px;
@@ -16,4 +17,43 @@ input {
     border-radius: 10px;
     padding: 10px 20px;
     margin-right: 5px;
+} */
+
+/* TO DO LIST STYLE */
+
+
+body {
+    background-color: gainsboro;
+    margin: 0;
 }
+
+h1 {
+    text-align: center;
+    font-family: "Caveat Brush", cursive;
+}
+
+.paper {
+    font-family: "Caveat Brush", cursive;
+    font-weight: 300;
+    font-style: normal;
+    position: relative;
+    line-height: 25px;
+    box-sizing: content-box;
+    height: auto;
+    background-color: white;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
+
+    .lines {
+        position: relative;
+        box-sizing: content-box;
+        height: auto;
+        padding-right: 8px;
+        padding-left: 20px;
+        background-image: repeating-linear-gradient(white 0px, white 28.5px, steelblue 30px);
+
+        ul {
+            margin: 0;
+        }
+    }
+}
+
