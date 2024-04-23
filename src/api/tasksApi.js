@@ -3,7 +3,7 @@ import { supabase } from '@/api/supabase'
 const TABLE_NAME = 'tasks'
 
 export const fetchAllTasks = async () => {
-  const { data, error } = await supabase.from('tasks').select('*')
+  const { data, error } = await supabase.from('tasks').select('*').order('id', { ascending: true })
 
   if (error) {
     throw new Error(error.message)
