@@ -33,3 +33,20 @@ export const logIn = async (email, password) => {
 }
 
 
+export const logOut = async () => {
+
+  const { error } = await supabase.auth.signOut()
+
+  if (!error) {
+    router.push('/signin');
+  }
+
+  if (error) {
+    throw new Error(error.message)
+  }
+}
+
+
+
+
+
