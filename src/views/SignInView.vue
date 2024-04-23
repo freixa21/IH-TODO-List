@@ -14,20 +14,28 @@ const signIn = () => {
 </script>
 
 <template>
-	<main>
-		<h1>Sign In View!</h1>
-		<label>
-			Email:
-			<input type="text" v-model="user" />
-		</label>
-		<label>
-			Password:
-			<input type="password" v-model="password" />
-		</label>
-
-		<button @click="signIn">Sign In</button>
+	<main class="min-h-[85vh] flex flex-col items-center justify-center">
+		<div class="paper max-w-[450px] w-full">
+			<div class="flex flex-col lines p-10">
+				<div class="mb-5">
+					<h1 class="text-5xl">TO DO LIST</h1>
+				</div>
+				<div class="flex flex-col items-center w-full">
+					<div class="flex flex-col w-full mb-2">
+						<label for="email" class="text-xl">Email:</label>
+						<input type="text" name="email" id="email" class="text-xl border-2 border-black" v-model="user" />
+					</div>
+					<div class="flex flex-col w-full mb-4">
+						<label for="password" class="text-xl">Password:</label>
+						<input type="password" id="password" class="text-xl border-2 border-black" v-model="password" />
+					</div>
+				</div>
+				<div class="w-full mb-2">
+					<button @click="signIn" class="px-3 py-1 bg-black text-white">Sign In</button>
+				</div>
+			</div>
+		</div>
 	</main>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

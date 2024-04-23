@@ -79,7 +79,7 @@ onMounted(() => {
 <template>
 	<main class="flex flex-row items-center">
 		<div class="min-h-[85vh] w-full flex flex-row justify-center">
-			<div class="paper max-w-[600px] h-full w-full py-11 m-5">
+			<div class="paper max-w-[600px] h-full w-full py-11 pr-2 pl-5 m-5">
 				<div class="lines">
 					<div class="my-10">
 						<strong>TO DO LIST</strong>
