@@ -84,10 +84,10 @@ onMounted(() => {
 						<ul class="w-full">
 							<li class="flex flex-row h-[30px] pt-[8px]"></li>
 							<li v-for="task in tasks" :key="task.id" class="flex flex-row h-[30px] pt-[8px] ">
-								<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)" class="mr-5"><img
-										src="@/assets/images/unchecked.svg" alt=""></button>
-								<button v-else @click="_markAsIncompleted(task.id)" class="mr-5"><img
-										src="@/assets/images/checked.svg" alt=""></button>
+								<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)" class="mr-5 w-[24px] h-[24px]"><img
+										src="@/assets/images/unchecked.png" alt=""></button>
+								<button v-else @click="_markAsIncompleted(task.id)" class="mr-5 w-[24px] h-[24px]"><img
+										src="@/assets/images/checked.png" alt=""></button>
 								<div class="flex flex-row">
 									<div>
 										<span v-if="!task.is_complete" class="text-2xl" style="line-height: 0;">{{
@@ -97,10 +97,10 @@ onMounted(() => {
 											style="line-height: 0;">{{ task.title }}</span>
 									</div>
 									<div class="absolute right-5">
-										<button @click="_deleteTask(task.id)"><img src="@/assets/images/delete.svg"
-												alt=""></button>
-										<button @click="_editTask(task.id)"><img src="@/assets/images/edit.svg"
-												alt=""></button>
+										<button @click="_deleteTask(task.id)"><img src="@/assets/images/delete.png"
+												alt="" class="w-[24px] h-[24px]"></button>
+										<button @click="_editTask(task.id)"><img src="@/assets/images/edit.png"
+												alt="" class="w-[24px] h-[24px]"></button>
 									</div>
 								</div>
 							</li>
