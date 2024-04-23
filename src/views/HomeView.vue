@@ -4,18 +4,20 @@ import { useTasksStore } from '@/stores/tasksStore';
 import { storeToRefs } from 'pinia';
 import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/userStore';
 
+const router = useRouter();
 const tasksStore = useTasksStore();
 const { tasks } = storeToRefs(tasksStore);
-const router = useRouter();
-
-
 const taskTitle = ref('');
-const editedTaskId = ref('');
+
+const usersStore = useUserStore();
+const currentUser = usersStore.user.id;
+
 
 const _addTask = async () => {
 	const task = {
-		user_id: '59d670b9-7fe3-41e5-8d63-527d4ca1b504',
+		user_id: currentUser,
 		title: taskTitle.value,
 		is_complete: false,
 	}
@@ -29,7 +31,7 @@ const _addTask = async () => {
 const _deleteTask = async (taskId) => {
 	const task = {
 		id: taskId,
-		user_id: '59d670b9-7fe3-41e5-8d63-527d4ca1b504',
+		user_id: currentUser,
 	}
 	// Borra la task
 	await tasksStore.deleteSelectedTask(task);
@@ -40,7 +42,7 @@ const _deleteTask = async (taskId) => {
 const _markAsCompleted = async (taskId) => {
 	const task = {
 		id: taskId,
-		user_id: '59d670b9-7fe3-41e5-8d63-527d4ca1b504',
+		user_id: currentUser,
 	}
 	// Borra la task
 	await tasksStore.markAsCompleted(task);
@@ -52,7 +54,7 @@ const _markAsIncompleted = async (taskId) => {
 
 	const task = {
 		id: taskId,
-		user_id: '59d670b9-7fe3-41e5-8d63-527d4ca1b504',
+		user_id: currentUser,
 	}
 	// Borra la task
 	await tasksStore.markAsIncompleted(task);
@@ -84,8 +86,9 @@ onMounted(() => {
 						<ul class="w-full">
 							<li class="flex flex-row h-[30px] pt-[8px]"></li>
 							<li v-for="task in tasks" :key="task.id" class="flex flex-row h-[30px] pt-[8px] ">
-								<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)" class="mr-5 w-[24px] h-[24px]"><img
-										src="@/assets/images/unchecked.png" alt=""></button>
+								<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)"
+									class="mr-5 w-[24px] h-[24px]"><img src="@/assets/images/unchecked.png"
+										alt=""></button>
 								<button v-else @click="_markAsIncompleted(task.id)" class="mr-5 w-[24px] h-[24px]"><img
 										src="@/assets/images/checked.png" alt=""></button>
 								<div class="flex flex-row">
@@ -99,8 +102,8 @@ onMounted(() => {
 									<div class="absolute right-5">
 										<button @click="_deleteTask(task.id)"><img src="@/assets/images/delete.png"
 												alt="" class="w-[24px] h-[24px]"></button>
-										<button @click="_editTask(task.id)"><img src="@/assets/images/edit.png"
-												alt="" class="w-[24px] h-[24px]"></button>
+										<button @click="_editTask(task.id)"><img src="@/assets/images/edit.png" alt=""
+												class="w-[24px] h-[24px]"></button>
 									</div>
 								</div>
 							</li>
