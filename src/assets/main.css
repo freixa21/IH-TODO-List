@@ -47,8 +47,6 @@ h1 {
         position: relative;
         box-sizing: content-box;
         height: auto;
-        padding-right: 8px;
-        padding-left: 20px;
         background-image: repeating-linear-gradient(white 0px, white 28.5px, steelblue 30px);
 
         ul {
