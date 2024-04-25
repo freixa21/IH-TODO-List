@@ -34,6 +34,8 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
 
+  debugger
+
   if (userStore.user === undefined) {
     await userStore.fetchUser()
   }

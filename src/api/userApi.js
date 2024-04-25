@@ -22,29 +22,20 @@ export const logIn = async (email, password) => {
       email, password
     })
 
-  if (!error) {
-    router.push('/');
-  }
-
   if (error) {
     throw new Error(error.message)
   }
+
   return user
 }
 
 
 export const logOut = async () => {
-
-  const { error } = await supabase.auth.signOut()
-
-  if (!error) {
-    router.push('/signin');
-  }
-
+  const { error } = await supabase.auth.signOut();
   if (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
-}
+};
 
 
 

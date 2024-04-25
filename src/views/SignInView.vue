@@ -1,14 +1,21 @@
 <script setup>
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
+import { useRouter } from 'vue-router';
 
 const userStore = useUserStore()
+const router = useRouter()
 
 const user = ref('')
 const password = ref('')
 
-const signIn = () => {
-	userStore.signIn(user.value, password.value)
+const signIn = async () => {
+	try {
+		await userStore.signIn(user.value, password.value)
+		router.push('/')
+	} catch(err) {
+		console.error(err)
+	}
 }
 
 </script>

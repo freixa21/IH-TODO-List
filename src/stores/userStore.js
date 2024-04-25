@@ -32,15 +32,16 @@ export const useUserStore = defineStore('user', () => {
     try {
       user.value = await logIn(email, password)
     } catch (error) {
-      console.error(error)
+      throw new Error(error.message)
     }
   }
 
   async function signOut() {
     try {
       await logOut();
-    } catch (error) {
-      console.error(error)
+      user.value = undefined
+    } catch(err) {
+      throw new Error(err.message)
     }
   }
 
