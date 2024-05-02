@@ -19,9 +19,9 @@ export const useTasksStore = defineStore('tasks', () => {
   }
 
   // Actions
-  async function fetchTasks() {
+  async function fetchTasks(currentUser) {
     try {
-      const data = await fetchAllTasks()
+      const data = await fetchAllTasks(currentUser)
       tasks.value = data;
     } catch (error) {
       console.error(error)

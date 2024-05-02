@@ -24,7 +24,7 @@ const _addTask = async () => {
 	// Crea la task
 	await tasksStore.createNewTask(task);
 	// Refresca las tasks despues de crearla
-	tasksStore.fetchTasks();
+	tasksStore.fetchTasks(currentUser);
 }
 
 
@@ -36,7 +36,7 @@ const _deleteTask = async (taskId) => {
 	// Borra la task
 	await tasksStore.deleteSelectedTask(task);
 	// Refresca las tasks despues de crearla
-	tasksStore.fetchTasks();
+	tasksStore.fetchTasks(currentUser);
 }
 
 const _markAsCompleted = async (taskId) => {
@@ -47,7 +47,7 @@ const _markAsCompleted = async (taskId) => {
 	// Borra la task
 	await tasksStore.markAsCompleted(task);
 	// Refresca las tasks despues de crearla
-	tasksStore.fetchTasks();
+	tasksStore.fetchTasks(currentUser);
 }
 
 const _markAsIncompleted = async (taskId) => {
@@ -59,7 +59,7 @@ const _markAsIncompleted = async (taskId) => {
 	// Borra la task
 	await tasksStore.markAsIncompleted(task);
 	// Refresca las tasks despues de crearla
-	tasksStore.fetchTasks();
+	tasksStore.fetchTasks(currentUser);
 }
 
 const _editTask = (taskId) => {
@@ -71,7 +71,7 @@ const remainingLiCount = computed(() => {
 });
 
 onMounted(() => {
-	tasksStore.fetchTasks();
+	tasksStore.fetchTasks(currentUser);
 })
 
 </script>
