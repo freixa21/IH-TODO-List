@@ -42,7 +42,7 @@ const signIn = async () => {
 					<button @click="signIn" class="px-3 py-1 bg-black text-white">Sign In</button>
 				</div>
 				<div>
-					<p>Not registered yet?<RouterLink to="/signup" class="underline">Sign up here</RouterLink>.</p>
+					<p>Not registered yet? <RouterLink to="/signup" class="underline">Sign up here</RouterLink>.</p>
 				</div>
 			</div>
 		</div>
