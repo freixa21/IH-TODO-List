@@ -5,7 +5,7 @@ import { computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 const usersStore = useUserStore();
-const router = useRouter(); 
+const router = useRouter();
 const route = useRoute();
 
 const _routeName = computed(() => route.name)
@@ -25,10 +25,10 @@ console.log(_routeName)
 <template>
 	<header>
 		<div class="wrapper">
-			<nav class="bg-white py-5 w-100 text-black flex flex-row justify-center">
-				<RouterLink to="/"><img src="" alt="TO DO LIST LOGO"></RouterLink>
-				<RouterLink v-show="_routeName !== 'signin' && _routeName !== 'signup'" to="/">Home</RouterLink>
-				<button v-show="_routeName !== 'signin' && _routeName !== 'signup'" @click="signOut">Logout</button>
+			<nav class=" py-5 w-100 text-black flex flex-row justify-end">
+				<!-- <RouterLink v-show="_routeName !== 'signin' && _routeName !== 'signup'" to="/">Hi, </RouterLink> -->
+				<button v-show="_routeName !== 'signin' && _routeName !== 'signup'" @click="signOut"><img
+						src="@/assets/images/logout.svg" alt="" class="p-4 bg-white rounded-xl mr-3 shadow-xl hover:scale-110 transition-transform"></button>
 			</nav>
 		</div>
 	</header>

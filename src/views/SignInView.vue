@@ -26,6 +26,7 @@ const signIn = async () => {
 			<div class="flex flex-col lines p-10">
 				<div class="mb-5">
 					<h1 class="text-5xl">TO DO LIST</h1>
+					<p class="text-center mt-2">You must be logged in to start using the application.</p>
 				</div>
 				<div class="flex flex-col items-center w-full">
 					<div class="flex flex-col w-full mb-2">
@@ -39,6 +40,9 @@ const signIn = async () => {
 				</div>
 				<div class="w-full mb-2">
 					<button @click="signIn" class="px-3 py-1 bg-black text-white">Sign In</button>
+				</div>
+				<div>
+					<p>Not registered yet?<RouterLink to="/signup" class="underline">Sign up here</RouterLink>.</p>
 				</div>
 			</div>
 		</div>
