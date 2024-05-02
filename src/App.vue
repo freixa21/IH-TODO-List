@@ -19,16 +19,17 @@ const signOut = async () => {
 	}
 }
 
-console.log(_routeName)
 </script>
 
 <template>
 	<header>
 		<div class="wrapper">
 			<nav class=" py-5 w-100 text-black flex flex-row justify-end">
-				<!-- <RouterLink v-show="_routeName !== 'signin' && _routeName !== 'signup'" to="/">Hi, </RouterLink> -->
+				<router-link v-show="_routeName === 'TaskEdit'" :to="{ path: '/' }"><img src="@/assets/images/back.svg" alt=""
+						class="p-4 bg-white rounded-xl mr-3 shadow-xl hover:scale-110 transition-transform"></router-link>
 				<button v-show="_routeName !== 'signin' && _routeName !== 'signup'" @click="signOut"><img
-						src="@/assets/images/logout.svg" alt="" class="p-4 bg-white rounded-xl mr-3 shadow-xl hover:scale-110 transition-transform"></button>
+						src="@/assets/images/logout.svg" alt=""
+						class="p-4 bg-white rounded-xl mr-3 shadow-xl hover:scale-110 transition-transform"></button>
 			</nav>
 		</div>
 	</header>

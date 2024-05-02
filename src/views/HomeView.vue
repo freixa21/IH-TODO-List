@@ -108,12 +108,15 @@ onMounted(() => {
 								</div>
 							</li>
 							<li class="flex flex-row h-[30px] pt-[8px]"></li>
-							<li><label>
-									New task:
+							<li>
+								<div class="flex flex-row w-full items-center">
+									<span class="min-w-fit">New task:</span>
 									<input type="text" v-model="taskTitle"
-										class="h-[28px] pt-[0px] mt-[5px] w-3/4 border-b-2 border-black focus:outline-none">
-								</label>
-								<button @click="_addTask">Add task</button>
+										class="h-[28px] pt-[0px] mt-[5px] w-full mx-2 border-b-2 border-black focus:outline-none">
+									<button @click="_addTask"><img src="@/assets/images/add.svg" alt=""
+											class="bg-white border-2 border-black rounded-md"></button>
+								</div>
+
 							</li>
 							<li class="flex flex-row h-[30px] pt-[8px]"></li>
 							<li v-for="index in remainingLiCount" :key="index" class="flex flex-row h-[30px] pt-[8px]">
@@ -122,13 +125,10 @@ onMounted(() => {
 						</ul>
 					</div>
 					<div>
-
 					</div>
 				</div>
-
 			</div>
 		</div>
-
 	</main>
 </template>
 
