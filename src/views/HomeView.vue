@@ -15,11 +15,11 @@ const usersStore = useUserStore();
 const currentUser = usersStore.user.id;
 
 const shootConfetti = () => {
-  const myConfetti = window.confetti.create(document.getElementById('body'), {
-    resize: true,
-    useWorker: true,
-  });
-  myConfetti();
+	const myConfetti = window.confetti.create(document.getElementById('body'), {
+		resize: true,
+		useWorker: true,
+	});
+	myConfetti();
 };
 
 
@@ -80,6 +80,14 @@ const remainingLiCount = computed(() => {
 });
 
 onMounted(() => {
+
+	console.log(currentUser);
+
+	if (currentUser === undefined) {
+		console.log("redirecting...");
+		router.push('/signin');
+	}
+
 	tasksStore.fetchTasks(currentUser);
 })
 
@@ -96,8 +104,8 @@ onMounted(() => {
 							<li class="flex flex-row min-h-[30px] mt-[5px]"></li>
 							<li v-for="task in tasks" :key="task.id" class="flex flex-row min-h-[30px]">
 								<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)"
-									class="mr-5 w-[24px] h-[24px] pt-1 confetti-button"><img src="@/assets/images/unchecked.png"
-										alt=""></button>
+									class="mr-5 w-[24px] h-[24px] pt-1 confetti-button"><img
+										src="@/assets/images/unchecked.png" alt=""></button>
 								<button v-else @click="_markAsIncompleted(task.id)"
 									class="mr-5 w-[24px] h-[24px] pt-1"><img src="@/assets/images/checked.png"
 										alt=""></button>
@@ -122,7 +130,8 @@ onMounted(() => {
 							<li>
 								<div class="flex flex-row w-full items-center">
 									<input type="text" v-model="taskTitle"
-										class="h-[28px] pt-[0px] mt-[5px] w-full mx-2 border-b-2 border-black focus:outline-none bg-transparent" placeholder="Add new task...">
+										class="h-[28px] pt-[0px] mt-[5px] w-full mx-2 border-b-2 border-black focus:outline-none bg-transparent"
+										placeholder="Add new task...">
 									<button @click="_addTask"><img src="@/assets/images/add.svg" alt=""
 											class="bg-white border-2 border-black rounded-md"></button>
 								</div>

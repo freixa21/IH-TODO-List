@@ -1,5 +1,4 @@
 import { supabase } from '@/api/supabase'
-import router from '@/router'
 
 export const fetchActualUser = async () => {
   const { data } = await supabase.auth.getSession()

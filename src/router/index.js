@@ -40,7 +40,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (userStore.user === null && to.name !== 'signin' && to.name !== 'signup') {
     next({ name: 'signin' })
-  } else if (userStore.user && (to.name === 'signin' || to.name === 'signup')) {
+  } else if (userStore.user && (to.name === 'signin' || to.name === 'signup') && useUserStore.user !== undefined) {
     next('/')
   } else {
     next()
