@@ -84,22 +84,24 @@ onMounted(() => {
 					<div class="my-10">
 						<strong>TO DO LIST</strong>
 						<ul class="w-full">
-							<li class="flex flex-row h-[30px] pt-[8px]"></li>
-							<li v-for="task in tasks" :key="task.id" class="flex flex-row h-[30px] pt-[8px] ">
+							<li class="flex flex-row min-h-[30px] mt-[5px]"></li>
+							<li v-for="task in tasks" :key="task.id" class="flex flex-row min-h-[30px]">
 								<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)"
-									class="mr-5 w-[24px] h-[24px]"><img src="@/assets/images/unchecked.png"
+									class="mr-5 w-[24px] h-[24px] pt-1"><img src="@/assets/images/unchecked.png"
 										alt=""></button>
-								<button v-else @click="_markAsIncompleted(task.id)" class="mr-5 w-[24px] h-[24px]"><img
-										src="@/assets/images/checked.png" alt=""></button>
-								<div class="flex flex-row">
+								<button v-else @click="_markAsIncompleted(task.id)"
+									class="mr-5 w-[24px] h-[24px] pt-1"><img src="@/assets/images/checked.png"
+										alt=""></button>
+								<div class="flex flex-row w-full pr-[75px]">
 									<div>
-										<span v-if="!task.is_complete" class="text-2xl" style="line-height: 0;">{{
+										<span v-if="!task.is_complete" class="text-2xl"
+											style="line-height: 1.209; font-size: 1.499rem;">{{
 								task.title }}</span>
 										<span v-else
-											class="inline-block decoration-inherit relative after:w-full after:content-[''] after:block after:w-fill after:h-2/4 after:absolute after:top-[0.1rem] after:left-0 after:border-b-2 after:border-red-600 text-2xl"
-											style="line-height: 0;">{{ task.title }}</span>
+											class="inline-block decoration-inherit relative text-2xl line-through"
+											style="line-height: 1.209; font-size: 1.499rem;">{{ task.title }}</span>
 									</div>
-									<div class="absolute right-5">
+									<div class="absolute right-5 pt-[3px]">
 										<button @click="_deleteTask(task.id)"><img src="@/assets/images/delete.png"
 												alt="" class="w-[24px] h-[24px]"></button>
 										<button @click="_editTask(task.id)"><img src="@/assets/images/edit.png" alt=""
@@ -107,19 +109,19 @@ onMounted(() => {
 									</div>
 								</div>
 							</li>
-							<li class="flex flex-row h-[30px] pt-[8px]"></li>
+							<li class="flex flex-row min-h-[30px] "></li>
 							<li>
 								<div class="flex flex-row w-full items-center">
 									<span class="min-w-fit">New task:</span>
 									<input type="text" v-model="taskTitle"
-										class="h-[28px] pt-[0px] mt-[5px] w-full mx-2 border-b-2 border-black focus:outline-none">
+										class="h-[28px] pt-[0px] mt-[5px] w-full mx-2 border-b-2 border-black focus:outline-none bg-transparent">
 									<button @click="_addTask"><img src="@/assets/images/add.svg" alt=""
 											class="bg-white border-2 border-black rounded-md"></button>
 								</div>
 
 							</li>
-							<li class="flex flex-row h-[30px] pt-[8px]"></li>
-							<li v-for="index in remainingLiCount" :key="index" class="flex flex-row h-[30px] pt-[8px]">
+							<li class="flex flex-row min-h-[30px] "></li>
+							<li v-for="index in remainingLiCount" :key="index" class="flex flex-row min-h-[30px] ">
 								<span></span>
 							</li>
 						</ul>
