@@ -14,6 +14,14 @@ const taskTitle = ref('');
 const usersStore = useUserStore();
 const currentUser = usersStore.user.id;
 
+const shootConfetti = () => {
+  const myConfetti = window.confetti.create(document.getElementById('body'), {
+    resize: true,
+    useWorker: true,
+  });
+  myConfetti();
+};
+
 
 const _addTask = async () => {
 	const task = {
@@ -44,10 +52,11 @@ const _markAsCompleted = async (taskId) => {
 		id: taskId,
 		user_id: currentUser,
 	}
-	// Borra la task
+	// Marcar como completada
 	await tasksStore.markAsCompleted(task);
 	// Refresca las tasks despues de crearla
 	tasksStore.fetchTasks(currentUser);
+	shootConfetti();
 }
 
 const _markAsIncompleted = async (taskId) => {
@@ -87,7 +96,7 @@ onMounted(() => {
 							<li class="flex flex-row min-h-[30px] mt-[5px]"></li>
 							<li v-for="task in tasks" :key="task.id" class="flex flex-row min-h-[30px]">
 								<button v-if="!task.is_complete" @click="_markAsCompleted(task.id)"
-									class="mr-5 w-[24px] h-[24px] pt-1"><img src="@/assets/images/unchecked.png"
+									class="mr-5 w-[24px] h-[24px] pt-1 confetti-button"><img src="@/assets/images/unchecked.png"
 										alt=""></button>
 								<button v-else @click="_markAsIncompleted(task.id)"
 									class="mr-5 w-[24px] h-[24px] pt-1"><img src="@/assets/images/checked.png"
