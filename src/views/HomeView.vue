@@ -121,9 +121,8 @@ onMounted(() => {
 							<li class="flex flex-row min-h-[30px] "></li>
 							<li>
 								<div class="flex flex-row w-full items-center">
-									<span class="min-w-fit">New task:</span>
 									<input type="text" v-model="taskTitle"
-										class="h-[28px] pt-[0px] mt-[5px] w-full mx-2 border-b-2 border-black focus:outline-none bg-transparent">
+										class="h-[28px] pt-[0px] mt-[5px] w-full mx-2 border-b-2 border-black focus:outline-none bg-transparent" placeholder="Add new task...">
 									<button @click="_addTask"><img src="@/assets/images/add.svg" alt=""
 											class="bg-white border-2 border-black rounded-md"></button>
 								</div>
